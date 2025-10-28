@@ -1,0 +1,41 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .field {
+
+  }
+
+  .box-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .button {
+      width: 330px;
+      height: 48px;
+      top: 260px;
+      left: 15px;
+      opacity: 1;
+      border-radius: 100px;
+      padding-top: 4px;
+      padding-right: 16px;
+      padding-bottom: 4px;
+      padding-left: 16px;
+      background-color: #07B0FB;
+      border: none;
+
+      span{
+        font-family: Roboto;
+        font-weight: 500px;
+        font-style: Medium;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: uppercase;
+        color: white;
+      }
+    }
+  }
+}
