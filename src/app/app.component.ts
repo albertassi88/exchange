@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ExchangePageComponent } from './features/exchange/pages/exchange-page/exchange-page.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ExchangePageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
