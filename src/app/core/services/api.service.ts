@@ -15,4 +15,10 @@ export class ApiService {
     const url = `${this.BASE_URL}/currentExchangeRate?apiKey=${this.API_KEY}&from_symbol=${from}&to_symbol=${to}`;
     return this.http.get(url);
   }
+
+  getDailyExchangeRate(to: string): Observable<any> {
+    const from = 'BRL';
+    const url = `${this.BASE_URL}/dailyExchangeRate?apiKey=${this.API_KEY}&from_symbol=${from}&to_symbol=${to}`;
+    return this.http.get(url);
+  }
 }

@@ -8,36 +8,20 @@
       </div>
       <span class="coin">{{ valueCurrencyCode }}/BRL</span>
     </div>
-  
+
     <div class="box-value">
       <h1>R$ {{ exchangeValue | number:'1.2-2' }}</h1>
     </div>
-  
+
     <div class="box-days">
       <span>LAST 30 DAYS</span>
-      <img src="assets/images/sum.png" alt="Sinal somar">
+      <button (click)="openListCard()">
+        <img *ngIf="!enableList" src="assets/images/sum.png" alt="Sinal somar">
+        <img *ngIf="enableList" src="assets/images/subtract.png" alt="Sinal somar">
+      </button>
     </div>
     <hr class="line">
   </div>
 </ng-container>
 
-<!-- <div class="box-card">
-  <div class="card">
-      <span class="days">09/03/2022</span>
-      <div class="box-values">
-          <div>
-            <span>Open: R$ 5.0666</span>
-            <span>Hight: R$ 5.0689</span>
-          </div>
-          <div>
-            <span>Close: R$ 5.0038</span>
-            <span>LOw: R$ 4.9836</span>
-          </div>
-      </div>
-      <div>
-        <span>close diff (%): +1.15%</span>
-        <img src="assets/images/positive.png" alt="Positivo">
-      </div>
-  </div>
-</div>
--->
+<app-list-currency-card *ngIf="enableList" [valueCurrencyCode]="valueCurrencyCode"></app-list-currency-card>

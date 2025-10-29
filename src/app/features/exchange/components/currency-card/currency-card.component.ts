@@ -2,20 +2,22 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ApiService } from '../../../../core/services/api.service';
 import { CommonModule } from '@angular/common';
+import { ListCurrencyCardComponent } from '../list-currency-card/list-currency-card.component';
 
 @Component({
   selector: 'app-currency-card',
-  imports: [MatCardModule, CommonModule ],
+  imports: [MatCardModule, CommonModule, ListCurrencyCardComponent],
   templateUrl: './currency-card.component.html',
   styleUrl: './currency-card.component.scss'
 })
 export class CurrencyCardComponent {
 
-  constructor(private api: ApiService) {}  
+  constructor(private api: ApiService) {}
 
   @Input() valueCurrencyCode: string = '';
   exchangeRate: number | null = null;
-  enableCurrency: boolean = false; 
+  enableCurrency: boolean = false;
+  enableList: boolean = false;
   exchangeValue: number = 0;
   dateString: string = '';
   from = 'BRL';
@@ -23,7 +25,6 @@ export class CurrencyCardComponent {
   ngOnInit() {
     this.api.getCurrentExchangeRate(this.valueCurrencyCode).subscribe({
       next: (data) => {
-        console.log('iiii', data)
         this.enableCurrency = true;
         this.exchangeRate = data?.[`${this.from}_${this.valueCurrencyCode}`]?.price ?? null;
         this.dateString = data?.lastUpdatedAt;
@@ -33,6 +34,9 @@ export class CurrencyCardComponent {
     });
   }
 
- 
+  openListCard() {
+    this.enableList = !this.enableList;
+  }
+
 
 }

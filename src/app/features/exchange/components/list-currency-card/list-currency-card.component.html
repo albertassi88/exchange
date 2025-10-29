@@ -1,0 +1,24 @@
+<div class="box-card">
+  <div class="card" *ngFor="let item of currencyData">
+    <span class="days">{{ item.date | date: 'dd/MM/yyyy' }}</span>
+
+    <div class="box-values">
+      <div>
+        <span><span class="text">Open:</span> R$ {{ item.open | number:'1.4-4' }}</span>
+        <span><span class="text">High:</span> R$ {{ item.high | number:'1.4-4' }}</span>
+      </div>
+
+      <div>
+        <span><span class="text">Close:</span> R$ {{ item.close | number:'1.4-4' }}</span>
+        <span><span class="text">Low:</span> R$ {{ item.low | number:'1.4-4' }}</span>
+      </div>
+    </div>
+
+    <div class="close-diff">
+      <span class="text">close diff (%):</span> +1.15%
+      <div>
+        <img src="assets/images/positive.png" alt="Positivo">
+      </div>
+    </div>
+  </div>
+</div>
