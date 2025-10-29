@@ -1,12 +1,21 @@
 <form class="form">
   <mat-form-field class="field">
     <mat-label>Enter the currency code</mat-label>
-    <input matInput>
+    <input matInput [(ngModel)]="currencyCode" name="currencyCode">
   </mat-form-field>
+
   <div class="box-button">
-    <button class="button">
+    <button type="button" class="button" (click)="onInputChange(currencyCode)">
       <span>Exchange result</span>
     </button>
   </div>
 </form>
+
+
+
+
+
+
+
+
 
