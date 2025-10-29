@@ -39,3 +39,8 @@
     }
   }
 }
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  width: 90% !important;
+  margin-left: 20px;
+}
