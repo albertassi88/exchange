@@ -16,30 +16,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ExchangePageComponent {
   currentCurrencyCode: string = '';
-  from = 'BRL';
-  to = 'JPY';
-  exchangeRate: number | null = null;
-  enableCurrency: boolean = false;
-
-  constructor(private api: ApiService) {}
-
-  ngOnInit() {
-    this.api.getCurrentExchangeRate(this.to).subscribe({
-      next: (data) => {
-        console.log(data, 'uiuuuiu');
-        this.exchangeRate = data?.[`${this.from}_${this.to}`]?.price ?? null;
-      },
-      error: (err) => console.error('Erro ao buscar taxa de câmbio:', err),
-    });
-  }
-
+  enableCurrency: boolean = false; 
 
   onCurrencyCodeChanged(newCode: string) {
     this.currentCurrencyCode = newCode;
     console.log('Código da moeda no pai:', this.currentCurrencyCode);
     this.enableCurrency = true;
-
-    // aqui você pode chamar serviço, atualizar UI, etc
   }
 
 }

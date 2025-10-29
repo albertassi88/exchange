@@ -7,7 +7,7 @@
       <hr class="line">
       <h2 class="page-title">BRL EXCHANGE RATE</h2>
       <app-currency-search (currencyCodeChange)="onCurrencyCodeChanged($event)"></app-currency-search>
-      <app-currency-card *ngIf="enableCurrency"></app-currency-card>
+      <app-currency-card *ngIf="enableCurrency" [valueCurrencyCode]="currentCurrencyCode"></app-currency-card>
     </div>
     <footer class="footer">
       <p>Copyright 2022 - Action Labs</p>

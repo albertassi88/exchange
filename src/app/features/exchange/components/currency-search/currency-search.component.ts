@@ -26,5 +26,4 @@ export class CurrencySearchComponent {
     this.currencyCodeChange.emit(this.currencyCode);  
   }
 
-
 }

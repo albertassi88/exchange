@@ -1,23 +1,25 @@
-<hr class="line">
-<div class="currency-container">
-  <div class="box-currency">
-    <div class="text">
-      <span>Exchange rate now</span>
-      <p>09/03/2022 - 15h09</p>
-    </div>
-    <span class="coin">USD/BRL</span>
-  </div>
-
-  <div class="box-value">
-    <h1>R$ 5,00</h1>
-  </div>
-
-  <div class="box-days">
-    <span>LAST 30 DAYS</span>
-    <img src="assets/images/sum.png" alt="Sinal somar">
-  </div>
+<ng-container *ngIf="enableCurrency">
   <hr class="line">
-</div>
+  <div class="currency-container">
+    <div class="box-currency">
+      <div class="text">
+        <span>Exchange rate now</span>
+        <p>{{ dateString | date: 'dd/MM/yyyy - HH\'h\'mm' }}</p>
+      </div>
+      <span class="coin">{{ valueCurrencyCode }}/BRL</span>
+    </div>
+  
+    <div class="box-value">
+      <h1>R$ {{ exchangeValue | number:'1.2-2' }}</h1>
+    </div>
+  
+    <div class="box-days">
+      <span>LAST 30 DAYS</span>
+      <img src="assets/images/sum.png" alt="Sinal somar">
+    </div>
+    <hr class="line">
+  </div>
+</ng-container>
 
 <!-- <div class="box-card">
   <div class="card">
