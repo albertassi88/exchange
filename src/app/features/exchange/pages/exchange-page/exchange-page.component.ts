@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { CurrencySearchComponent } from '../../components/currency-search/currency-search.component';
 import { CurrencyCardComponent } from '../../components/currency-card/currency-card.component';
 import { ApiService } from '../../../../core/services/api.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-exchange-page',
-  imports: [CurrencySearchComponent,CurrencyCardComponent],
+  imports: [
+    CurrencySearchComponent,
+    CurrencyCardComponent,
+    CommonModule
+  ],
   templateUrl: './exchange-page.component.html',
   styleUrl: './exchange-page.component.scss'
 })
@@ -14,6 +19,7 @@ export class ExchangePageComponent {
   from = 'BRL';
   to = 'JPY';
   exchangeRate: number | null = null;
+  enableCurrency: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -31,6 +37,8 @@ export class ExchangePageComponent {
   onCurrencyCodeChanged(newCode: string) {
     this.currentCurrencyCode = newCode;
     console.log('Código da moeda no pai:', this.currentCurrencyCode);
+    this.enableCurrency = true;
+
     // aqui você pode chamar serviço, atualizar UI, etc
   }
 

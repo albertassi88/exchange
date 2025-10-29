@@ -24,7 +24,6 @@ export class CurrencySearchComponent {
   onInputChange(value: string) {
     this.currencyCode = value;
     this.currencyCodeChange.emit(this.currencyCode);  
-    this.currencyCode = '';
   }
 
 

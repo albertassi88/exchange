@@ -13,8 +13,6 @@
     .button {
       width: 330px;
       height: 48px;
-      top: 260px;
-      left: 15px;
       opacity: 1;
       border-radius: 100px;
       padding-top: 4px;
@@ -23,6 +21,7 @@
       padding-left: 16px;
       background-color: #07B0FB;
       border: none;
+      margin-top: 7px;
 
       span{
         font-family: Roboto;
@@ -41,6 +40,18 @@
 }
 
 ::ng-deep .mat-mdc-text-field-wrapper {
-  width: 90% !important;
-  margin-left: 20px;
+  width: 92% !important;
+  margin-left: 16px;
+  background-color: #F4F4F4 !important;
+  color: #3F3F3F !important
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: Regular !important;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #3F3F3F
 }
