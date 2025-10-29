@@ -1,33 +1,67 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../../../../core/services/api.service';
-import teste from './teste.json';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+import { ExchangeHistoryResponse } from '../../../../core/models/exchange.model';
 
 @Component({
   selector: 'app-list-currency-card',
   templateUrl: './list-currency-card.component.html',
   styleUrls: ['./list-currency-card.component.scss'],
-  imports: [CommonModule]
+  imports: [
+    CommonModule,
+    LoaderComponent
+  ]
 })
+
 export class ListCurrencyCardComponent implements OnInit {
 
   constructor(private api: ApiService) {}
 
-  from = 'BRL';
   @Input() valueCurrencyCode: string = '';
-  dateString: string = '';
   currencyData: any[] = [];
 
-  ngOnInit() {
-    this.currencyData = teste.data; // pega só o array "data"
-    console.log('tatatata', this.valueCurrencyCode)
+  isLoading: boolean = true;
+
+  ngOnInit(): void {
+    this.loadDailyExchangeRate();
+  }
+
+  loadDailyExchangeRate(): void {
+    this.isLoading = true;
+
     this.api.getDailyExchangeRate(this.valueCurrencyCode).subscribe({
-      next: (data) => {
-        this.dateString = data?.
-        console.log('ahhahahahaha', data)
+      next: (response: ExchangeHistoryResponse) => {
+        this.currencyData = this.calculateCloseDiff(response.data);
+        this.isLoading = false;
       },
-      error: (err) => console.error('Erro ao buscar taxa de câmbio:', err),
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Erro ao buscar taxa de câmbio:', err);
+      },
     });
   }
+
+  calculateCloseDiff(data: any[]) {
+  return data.map((item, index, arr) => {
+    if (index === 0) {
+      return { ...item, closeDiff: 0 };
+    }
+
+    const currentClose = Number(item.close);
+    const prevClose = Number(arr[index - 1]?.close);
+
+    if (!isFinite(prevClose) || prevClose === 0) {
+      return { ...item, closeDiff: null };
+    }
+
+    const diffPercent = ((currentClose - prevClose) / prevClose) * 100;
+
+    return { ...item, closeDiff: diffPercent };
+  });
+}
+
+
+
 
 }

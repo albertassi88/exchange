@@ -1,13 +1,12 @@
 .box-card {
   background-color: #F4F4F4;
-  margin-left: 14px;
-  margin-right: 12px;
+  margin: 14px 14px 0 14px;
   display: flex;
   flex-direction: column;
 
   .card {
     background-color: white !important;
-    margin: 11px 11px 11px 11px;
+    margin: 11px 11px 7px 11px;
     padding: 16px;
 
     .days {
@@ -56,6 +55,15 @@
     .close-diff {
       display: flex;
       align-items: center;
+
+      .positive {
+        color: #69C669;
+      }
+
+      .negative {
+        color: #E54E4E;
+      }
+
       span {
         font-family: Roboto;
         font-weight: 600;
@@ -63,7 +71,6 @@
         line-height: 24px;
         letter-spacing: 0px;
         vertical-align: middle;
-        color: #69C669;
           .text {
             font-family: Roboto;
             font-weight: 500;

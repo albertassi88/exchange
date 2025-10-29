@@ -1,3 +1,5 @@
+<app-loading [visible]="isLoading"></app-loading>
+
 <ng-container *ngIf="enableCurrency">
   <hr class="line">
   <div class="currency-container">
@@ -16,12 +18,13 @@
     <div class="box-days">
       <span>LAST 30 DAYS</span>
       <button (click)="openListCard()">
-        <img *ngIf="!enableList" src="assets/images/sum.png" alt="Sinal somar">
-        <img *ngIf="enableList" src="assets/images/subtract.png" alt="Sinal somar">
+        <img *ngIf="!enableList" src="assets/images/sum.png" alt="sinal somar">
+        <img *ngIf="enableList" src="assets/images/subtract.png" alt="sinal subtrair">
       </button>
     </div>
-    <hr class="line">
+    <hr *ngIf="!enableList" class="line">
   </div>
 </ng-container>
 
 <app-list-currency-card *ngIf="enableList" [valueCurrencyCode]="valueCurrencyCode"></app-list-currency-card>
+<hr *ngIf="enableList" class="lineClose">

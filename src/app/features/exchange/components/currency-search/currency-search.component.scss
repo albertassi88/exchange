@@ -2,9 +2,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  .field {
-
-  }
 
   .box-button {
     width: 100%;
@@ -22,6 +19,7 @@
       background-color: #07B0FB;
       border: none;
       margin-top: 7px;
+      cursor: pointer;
 
       span{
         font-family: Roboto;
@@ -35,6 +33,10 @@
         text-transform: uppercase;
         color: white;
       }
+    }
+
+    .button:hover {
+      background-color: #25b9f8;
     }
   }
 }

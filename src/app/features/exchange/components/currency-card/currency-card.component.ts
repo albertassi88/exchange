@@ -1,16 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ApiService } from '../../../../core/services/api.service';
 import { CommonModule } from '@angular/common';
 import { ListCurrencyCardComponent } from '../list-currency-card/list-currency-card.component';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+import { ExchangeRateResponse } from '../../../../core/models/exchange.model';
 
 @Component({
   selector: 'app-currency-card',
-  imports: [MatCardModule, CommonModule, ListCurrencyCardComponent],
+  standalone: true,
+  imports: [CommonModule, ListCurrencyCardComponent, LoaderComponent],
   templateUrl: './currency-card.component.html',
-  styleUrl: './currency-card.component.scss'
+  styleUrls: ['./currency-card.component.scss']
 })
-export class CurrencyCardComponent {
+export class CurrencyCardComponent implements OnInit, OnChanges {
 
   constructor(private api: ApiService) {}
 
@@ -20,23 +22,41 @@ export class CurrencyCardComponent {
   enableList: boolean = false;
   exchangeValue: number = 0;
   dateString: string = '';
-  from = 'BRL';
+  isLoading: boolean = true;
+  from: string = 'BRL';
 
   ngOnInit() {
+    if (this.valueCurrencyCode) {
+      this.loadExchangeRate();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['valueCurrencyCode'] && !changes['valueCurrencyCode'].firstChange) {
+      this.loadExchangeRate();
+    }
+  }
+
+  loadExchangeRate() {
+    this.isLoading = true;
     this.api.getCurrentExchangeRate(this.valueCurrencyCode).subscribe({
-      next: (data) => {
+      next: (data: ExchangeRateResponse) => {
         this.enableCurrency = true;
-        this.exchangeRate = data?.[`${this.from}_${this.valueCurrencyCode}`]?.price ?? null;
-        this.dateString = data?.lastUpdatedAt;
-        this.exchangeValue = data?.exchangeRate;
+        this.exchangeRate = data.exchangeRate;
+        this.dateString = data.lastUpdatedAt;
+        this.exchangeValue = data.exchangeRate;
+        this.isLoading = false;
       },
-      error: (err) => console.error('Erro ao buscar taxa de câmbio:', err),
+      error: (err) => {
+        this.isLoading = false;
+        console.error('Erro ao buscar taxa de câmbio:', err);
+      },
     });
   }
+
 
   openListCard() {
     this.enableList = !this.enableList;
   }
-
-
 }
+
